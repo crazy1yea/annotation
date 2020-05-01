@@ -1,0 +1,173 @@
+package com.example.annotation.util.chart.word.process;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.springframework.util.ObjectUtils;
+
+import com.example.annotation.util.chart.word.model.Status;
+import com.example.annotation.util.chart.word.model.WordData;
+
+/**
+ * 数据填充分析器
+ * 
+ * @author slzs 
+ * 2017年4月14日 下午1:17:43
+ */
+public class DataFillAnalyzer {
+	Map<String, Integer> iteratorIndexMap;
+	public WordData nextIterator; // 待迭代数据
+	private List<WordData> analyzedList; // 分析过的数据
+	private TableAnalyzer tableAnalyzer;
+	private IteratorAnalyzer iteratorAnalyzer;
+	private ParagraphAnalyzer paragraphAnalyzer;
+
+	public DataFillAnalyzer(StyleAnalyzer styleAnalyzer) {
+		iteratorIndexMap = new HashMap<String, Integer>();
+		//迭代数据分析
+		iteratorAnalyzer = new IteratorAnalyzer(this, styleAnalyzer);
+		//段落内容处理
+		paragraphAnalyzer = new ParagraphAnalyzer(this, iteratorAnalyzer);
+		//表格处理
+		tableAnalyzer = new TableAnalyzer(this, paragraphAnalyzer, styleAnalyzer);
+	}
+
+	/**
+	 * 合并后移除数据
+	 * 
+	 * @author: slzs 2015-2-5 下午3:41:14
+	 * @param data
+	 * @param iteratorKey
+	 * @param wordDataList
+	 */
+	void mergeMove(WordData data, String iteratorKey, List<WordData> wordDataList) {
+		if (!ObjectUtils.isEmpty(wordDataList)) {
+			WordData wordData = wordDataList.get(0); // 当遇到迭代器next节点时移除0
+
+			// 清空旧数据
+			Map<String, String> dataTextMap = data.getTextFieldMap();
+			Map<String, Object> dataImageMap = data.getImageFieldMap();
+			removeByKeyPrefix(iteratorKey, dataTextMap); // 先清空旧数据
+			removeByKeyPrefix(iteratorKey, dataImageMap); // 先清空旧数据
+			if (wordData != null) {
+				if (wordData.hasTextField()) {
+					Map<String, String> tempMap = wordData.getTextFieldMap();
+					if (!ObjectUtils.isEmpty(dataTextMap)) {// 设置下一组文本
+						dataTextMap.putAll(tempMap);
+					} else {
+						data.setTextFieldMap(tempMap);
+					}
+				}
+
+				if (wordData.hasImageField()) { // 设置下一组图片
+					Map<String, Object> tempMap = wordData.getImageFieldMap();
+					if (!ObjectUtils.isEmpty(dataImageMap)) {
+						dataImageMap.putAll(tempMap);
+					} else {
+						data.setImageFieldMap(tempMap);
+					}
+				}
+
+				if (wordData.hasIterator()) {
+					// 嵌套迭代数据处理
+					if (nextIterator == null) {
+						nextIterator = new WordData();
+					}
+					Map<String, List<WordData>> nextMap = wordData.getIteratorMap();
+					Integer index = iteratorIndexMap.get(iteratorKey);
+					if (index == null)
+						index = 0;
+					for (String key : nextMap.keySet()) {
+						nextIterator.addIterator(
+								iteratorKey + index + key.substring(key.indexOf(iteratorKey) + iteratorKey.length()),
+								nextMap.get(key));
+					}
+				}
+
+				if (wordData.hasTable()) {
+					throw new RuntimeException("当前版本尚未实现迭代表格数据方法……");
+				}
+			}
+
+			wordDataList.remove(0); // 移除迭代数据
+		}
+	}
+
+	/**
+	 * 依据key前缀删除map数据
+	 * 
+	 * @author: slzs 2015-2-5 下午6:15:16
+	 * @param prefix
+	 * @param dataMap
+	 */
+	private Map<String, ?> removeByKeyPrefix(String prefix, Map<String, ?> dataMap) {
+		if (!ObjectUtils.isEmpty(dataMap)) {
+			Object[] keyArray = dataMap.keySet().toArray();
+			for (Object key : keyArray) {
+				if (key.toString().startsWith(prefix + ".")) {
+					dataMap.remove(key);
+				}
+			}
+		}
+		return dataMap;
+	}
+
+	/**
+	 * 数据标记分析
+	 * 
+	 * @author: slzs 2016-1-12 上午11:46:58
+	 * @param document
+	 * @param data
+	 * @return
+	 */
+	public Status analyData(XWPFDocument document, WordData data) {
+		Status res = Status.SUCCESS;
+		if (analyzedList == null) {
+			analyzedList = new ArrayList<>();
+			// 初始解析表格标签，清空无数据单元格
+			tableAnalyzer.analy(document, data.getTableMap());
+		}
+		if (!analyzedList.contains(data)) {
+
+			if (data.hasTable()) {
+				data = tableAnalyzer.tableAllNext(data);
+			}
+
+			if (data.hasIterator()) {
+				// 迭代标签解析
+				res = iteratorAnalyzer.analy(document, data.getIteratorMap());
+				data = iteratorAnalyzer.iteratorAllNext(data);
+			}
+			analyzedList.add(data);
+		}
+		return res;
+	}
+
+	/**
+	 * @see ParagraphAnalyzer
+	 * @author slzs 2017年4月26日 上午10:23:36
+	 * @param document2
+	 * @param paragraph
+	 * @param data
+	 * @return
+	 */
+	public Status setParagraphContent(XWPFParagraph paragraph, WordData data) {
+		return paragraphAnalyzer.setParagraphContent(paragraph, data);
+	}
+
+	/**
+	 * @see TableAnalyzer
+	 * @author slzs 2017年4月26日 上午10:23:47
+	 * @param document2
+	 * @param table
+	 * @param data
+	 */
+	public void setTableContent(XWPFTable table, WordData data) {
+		tableAnalyzer.setTableContent(table, data);
+	}
+}
