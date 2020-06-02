@@ -1,8 +1,8 @@
 package com.example.annotation;
 
 /**
- * Hello world!
- *
+ * 主方法
+。 * 2020年6月2日
  */
 public class App {
 	public static void main(String[] args) {

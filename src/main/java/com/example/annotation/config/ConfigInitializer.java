@@ -8,7 +8,6 @@ public class ConfigInitializer extends AbstractAnnotationConfigDispatcherServlet
 	 */
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		// TODO Auto-generated method stub
 		return new Class<?>[] {RootConfig.class};
 	}
 	/**
@@ -16,7 +15,6 @@ public class ConfigInitializer extends AbstractAnnotationConfigDispatcherServlet
 	 */
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		// TODO Auto-generated method stub
 		return new Class<?>[] {ServletConfig.class};
 	}
 	/**
@@ -24,7 +22,6 @@ public class ConfigInitializer extends AbstractAnnotationConfigDispatcherServlet
 	 */
 	@Override
 	protected String[] getServletMappings() {
-		// TODO Auto-generated method stub
 		// 拦截所有请求不包括jsp
 		return new String[] {"/"};
 	}
