@@ -2,11 +2,13 @@ package com.example.annotation.config.druid;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.AutoMappingBehavior;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.LocalCacheScope;
@@ -22,6 +24,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import com.github.pagehelper.PageHelper;
 
 @Configuration
 @MapperScan("com.example.annotation.mapper")
@@ -104,10 +108,26 @@ public class MybatisConfig {
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		Resource[] mapperLocations = resolver.getResources(mapperPath);
 		sqlSessionFactoryBean.setMapperLocations(mapperLocations);
+		
 		// 配置插件
-		//sqlSessionFactoryBean.setPlugins(plugins);
+		sqlSessionFactoryBean.setPlugins(new Interceptor[]{(Interceptor) pageHelper()});
 
 		return sqlSessionFactoryBean;
+	}
+	/**
+	 * 分页插件
+	 * 2020年6月2日
+	 * @return
+	 */
+	@Bean
+	public PageHelper pageHelper() {
+		PageHelper pageHelper = new PageHelper();
+		Properties p = new Properties();
+		p.setProperty("offsetAsPageNum", "true");
+		p.setProperty("rowBoundsWithCount", "true");
+		p.setProperty("reasonable", "true");
+		pageHelper.setProperties(p);
+		return pageHelper;
 	}
 
 	/**
