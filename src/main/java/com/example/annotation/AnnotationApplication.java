@@ -1,10 +1,10 @@
 package com.example.annotation;
 
 /**
- * 主方法
-。 * 2020年6月2日
+ * 主类
+ * 2020年6月9日
  */
-public class App {
+public class AnnotationApplication {
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
 	}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry location="ojdbc6.jar" />
+	<!-- <classPathEntry location="mysql-connector-java-5.1.41.jar" /> -->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<!-- 生成的Java文件的编码 -->
+		<property name="javaFileEncoding" value="UTF-8" />
+		<!-- 格式化java代码 -->
+		<property name="javaFormatter" 
+			value="org.mybatis.generator.api.dom.DefaultJavaFormatter" />
+		<!-- 格式化XML代码 -->
+		<property name="xmlFormatter" 
+			value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
+		
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+		
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<!-- 
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+		 -->
+		<commentGenerator>
+			<!-- true关闭自动生成的注释(关闭后生成器不能识别已有代码,再次生成会重复) -->
+			<property name="suppressAllComments" value="true" />
+			<!-- true,添加数据库注释到model -->
+			<property name="addRemarkComments" value="true" />
+			<!-- true关闭注释中的创建时间 -->
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<!--数据库连接 -->
+		<jdbcConnection 
+			driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@192.168.42.107:1521:orcl"
+			userId="DATA_QUALITYS" 
+			password="DATA_QUALITYS" />
+		<!--model位置 -->
+		<javaModelGenerator 
+			targetPackage="com.bjrun.analysis.mapper" 
+			targetProject="../src/main/java" >
+			<property name="enableSubPackages" value="true" />
+		</javaModelGenerator>
+		
+		<!--mapping文件位置 -->
+		<!--
+			SQL map生成器， Mybatis3之后,可使用mapper.xml文件+Mapper接口（或者不用mapper接口）, 
+			或者只使用Mapper接口+Annotation,
+			如果  javaClientGenerator中配置了需要生成XML的话,这个元素就必须配置
+		 -->
+		<sqlMapGenerator 
+			targetPackage="com.bjrun.analysis.mapper"
+			targetProject="../src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!--XML位置 -->
+		<!-- 生成Mapper接口，如果没有配置，不会生成Mapper接口 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.bjrun.analysis.mapper"
+			targetProject="../src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!--要生成的表名 -->
+		<!-- 
+		<table tableName="DATA_DETAIL_NEW"  
+			domainObjectName="dcDataDetail"
+			enableCountByExample="false"
+			enableDeleteByPrimaryKey="false"
+			enableDeleteByExample="false"
+			enableSelectByExample="false"
+			enableSelectByPrimaryKey="false"
+			enableUpdateByExample="false"
+			enableUpdateByPrimaryKey="false"
+			enableInsert="false"
+			selectByExampleQueryId="false"
+			selectByPrimaryKeyQueryId="false" >
+			<generatedKey column="ID" sqlStatement="ORACLE" identity="true" />
+		</table>
+		 -->
+		<table tableName="TASK_REPORT_RECORD"
+			enableCountByExample="false"
+			enableDeleteByPrimaryKey="false"
+			enableDeleteByExample="false"
+			enableSelectByExample="false"
+			enableSelectByPrimaryKey="false"
+			enableUpdateByExample="false"
+			enableUpdateByPrimaryKey="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="ID" sqlStatement="ORACLE" identity="true" />
+		</table>
+	</context>
+</generatorConfiguration>

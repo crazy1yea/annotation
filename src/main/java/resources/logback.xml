@@ -3,8 +3,7 @@
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoder 默认配置为PatternLayoutEncoder -->
 		<encoder>
-			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}-%L
-				-%msg%n</pattern>
+			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}-%L -%msg%n</pattern>
 		</encoder>
 	</appender>
 
@@ -25,8 +24,7 @@
 		<!-- <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> 
 			<MaxFileSize>20MB</MaxFileSize> </TimeBasedFileNamingAndTriggeringPolicy> -->
 		<encoder>
-			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}-%L
-				-%msg%n</pattern>
+			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}-%L -%msg%n</pattern>
 		</encoder>
 	</appender>
 
@@ -43,8 +41,7 @@
 			<maxHistory>2</maxHistory>
 		</rollingPolicy>
 		<encoder>
-			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}-%L
-				-%msg%n</pattern>
+			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}-%L -%msg%n</pattern>
 		</encoder>
 	</appender>
 
@@ -64,8 +61,7 @@
 		<!-- <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> 
 			<MaxFileSize>20MB</MaxFileSize> </TimeBasedFileNamingAndTriggeringPolicy> -->
 		<encoder>
-			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}-%L
-				-%msg%n</pattern>
+			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}-%L -%msg%n</pattern>
 		</encoder>
 	</appender>
 
@@ -82,13 +78,15 @@
 		<!-- <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> 
 			<MaxFileSize>20MB</MaxFileSize> </TimeBasedFileNamingAndTriggeringPolicy> -->
 		<encoder>
-			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}-%L
-				-%msg%n</pattern>
+			<pattern>%d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}-%L -%msg%n</pattern>
 		</encoder>
 	</appender>
 
 	<root level="info">
-		<!-- <level value="error" /> <level value="info" /> -->
+		<!-- 
+		<level value="error" />
+		<level value="info" />
+		 -->
 		<appender-ref ref="suc" />
 		<appender-ref ref="err" />
 		<appender-ref ref="warn" />
