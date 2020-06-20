@@ -1,4 +1,4 @@
-package com.example.annotation.util.chart.word.process;
+package com.example.annotation.util.word.process;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,9 +24,9 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR;
 import org.springframework.util.ObjectUtils;
 import org.w3c.dom.Node;
 
-import com.example.annotation.util.chart.word.model.DataFillType;
-import com.example.annotation.util.chart.word.model.Status;
-import com.example.annotation.util.chart.word.model.WordData;
+import com.example.annotation.util.word.model.DataFillType;
+import com.example.annotation.util.word.model.Status;
+import com.example.annotation.util.word.model.WordData;
 
 import lombok.extern.slf4j.Slf4j;
 

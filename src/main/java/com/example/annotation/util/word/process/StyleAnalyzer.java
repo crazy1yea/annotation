@@ -1,4 +1,4 @@
-package com.example.annotation.util.chart.word.process;
+package com.example.annotation.util.word.process;
 
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;

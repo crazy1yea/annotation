@@ -1,4 +1,4 @@
-package com.example.annotation.util.chart.word.process;
+package com.example.annotation.util.word.process;
 
 import java.util.List;
 
@@ -11,8 +11,7 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-
-import com.alibaba.druid.util.StringUtils;
+import org.springframework.util.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 

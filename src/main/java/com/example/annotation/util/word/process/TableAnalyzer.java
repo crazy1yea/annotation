@@ -1,4 +1,4 @@
-package com.example.annotation.util.chart.word.process;
+package com.example.annotation.util.word.process;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +12,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.springframework.util.ObjectUtils;
 
-import com.example.annotation.util.chart.word.model.WordData;
+import com.example.annotation.util.word.model.WordData;
 
 /**
  * 表格处理

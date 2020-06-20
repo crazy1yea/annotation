@@ -1,4 +1,4 @@
-package com.example.annotation.util.chart.word.process;
+package com.example.annotation.util.word.process;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,8 +10,8 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.springframework.util.ObjectUtils;
 
-import com.example.annotation.util.chart.word.model.Status;
-import com.example.annotation.util.chart.word.model.WordData;
+import com.example.annotation.util.word.model.Status;
+import com.example.annotation.util.word.model.WordData;
 
 /**
  * 数据填充分析器

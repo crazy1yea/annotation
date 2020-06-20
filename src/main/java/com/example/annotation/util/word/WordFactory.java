@@ -1,4 +1,4 @@
-package com.example.annotation.util.chart.word;
+package com.example.annotation.util.word;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -16,13 +16,13 @@ import org.apache.poi.xwpf.usermodel.IBodyElement;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.springframework.util.StringUtils;
 
-import com.alibaba.druid.util.StringUtils;
-import com.example.annotation.util.chart.word.model.Status;
-import com.example.annotation.util.chart.word.model.WordData;
-import com.example.annotation.util.chart.word.process.DataFillAnalyzer;
-import com.example.annotation.util.chart.word.process.MarkAnalyzer;
-import com.example.annotation.util.chart.word.process.StyleAnalyzer;
+import com.example.annotation.util.word.model.Status;
+import com.example.annotation.util.word.model.WordData;
+import com.example.annotation.util.word.process.DataFillAnalyzer;
+import com.example.annotation.util.word.process.MarkAnalyzer;
+import com.example.annotation.util.word.process.StyleAnalyzer;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.example.annotation.util.chart.word.model;
+package com.example.annotation.util.word.model;
 
 /**
  * @author 北京拓尔思信息技术股份有限公司

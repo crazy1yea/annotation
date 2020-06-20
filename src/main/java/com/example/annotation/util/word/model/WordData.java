@@ -1,4 +1,4 @@
-package com.example.annotation.util.chart.word.model;
+package com.example.annotation.util.word.model;
 
 import java.io.File;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package com.example.annotation.util.chart.word.process;
+package com.example.annotation.util.word.process;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -15,10 +15,10 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.apache.xmlbeans.XmlCursor;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
-import com.alibaba.druid.util.StringUtils;
-import com.example.annotation.util.chart.word.model.Status;
-import com.example.annotation.util.chart.word.model.WordData;
+import com.example.annotation.util.word.model.Status;
+import com.example.annotation.util.word.model.WordData;
 
 
 
