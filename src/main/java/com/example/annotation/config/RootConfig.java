@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.file.remote.session.CachingSessionFactory;
 import org.springframework.integration.file.remote.session.SessionFactory;
@@ -17,25 +18,24 @@ import org.springframework.integration.ftp.session.FtpRemoteFileTemplate;
 import org.springframework.integration.ftp.session.FtpSession;
 import org.springframework.stereotype.Controller;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @ComponentScan(value = "com.example.annotation", excludeFilters = {
 		@Filter(type = FilterType.ANNOTATION, classes = { Controller.class }) })
+@PropertySource(value = { "classpath:application.properties" })
 public class RootConfig {
 
 	@Value("${ftp.host}")
 	private String ftpHost;
-
 	@Value("${ftp.port}")
-	private int ftpPort;
-
+	private String ftpPort;
 	@Value("${ftp.user}")
 	private String ftpUser;
-
 	@Value("${ftp.password}")
 	private String ftpPassword;
-
 	@Value("${ftp.remote.directory}")
 	private String ftpRemoteDirectory;
-
 	@Value("${ftp.remote.FileSeparator}")
 	private String ftpRemoteFileSeparator;
 
@@ -52,7 +52,7 @@ public class RootConfig {
 			}
 		};
 		ftpSessionFactory.setHost(ftpHost);
-		ftpSessionFactory.setPort(ftpPort);
+		ftpSessionFactory.setPort(Integer.parseInt(ftpPort));
 		ftpSessionFactory.setUsername(ftpUser);
 		ftpSessionFactory.setPassword(ftpPassword);
 		ftpSessionFactory.setControlEncoding("UTF-8");
