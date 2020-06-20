@@ -18,9 +18,6 @@ import org.springframework.integration.ftp.session.FtpRemoteFileTemplate;
 import org.springframework.integration.ftp.session.FtpSession;
 import org.springframework.stereotype.Controller;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @ComponentScan(value = "com.example.annotation", excludeFilters = {
 		@Filter(type = FilterType.ANNOTATION, classes = { Controller.class }) })
 @PropertySource(value = { "classpath:application.properties" })
