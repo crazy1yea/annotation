@@ -16,8 +16,14 @@ import org.springframework.integration.file.remote.session.SessionFactory;
 import org.springframework.integration.ftp.session.DefaultFtpSessionFactory;
 import org.springframework.integration.ftp.session.FtpRemoteFileTemplate;
 import org.springframework.integration.ftp.session.FtpSession;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 
+import java.util.concurrent.ThreadPoolExecutor;
+
+/**
+ * @author yangy
+ */
 @ComponentScan(value = "com.example.annotation", excludeFilters = {
 		@Filter(type = FilterType.ANNOTATION, classes = { Controller.class }) })
 @PropertySource(value = { "classpath:application.properties" })
@@ -76,5 +82,24 @@ public class RootConfig {
 		template.setRemoteFileSeparator(ftpRemoteFileSeparator);
 		template.setExistsMode(FtpRemoteFileTemplate.ExistsMode.NLST);
 		return template;
+	}
+
+	@Bean
+	public ThreadPoolTaskExecutor springExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		// 此方法返回可用处理器的虚拟机的最大数量; 不小于1
+		// 设置核心线程数
+		executor.setCorePoolSize(5);
+		// 设置最大线程数
+		executor.setMaxPoolSize(11);
+		// 除核心线程外的线程存活时间
+		executor.setKeepAliveSeconds(3);
+		// 如果传入值大于0，底层队列使用的是LinkedBlockingQueue,否则默认使用SynchronousQueue
+		executor.setQueueCapacity(40);
+		// 线程名称前缀
+		executor.setThreadNamePrefix("thread-execute");
+		// 设置拒绝策略
+		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+		return executor;
 	}
 }
