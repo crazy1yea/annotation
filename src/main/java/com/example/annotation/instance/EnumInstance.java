@@ -19,12 +19,12 @@ public enum EnumInstance {
 
 	private EnumInstance() {
 		executor = new ThreadPoolExecutor(
-				10,
-				15,
-				10,
-				TimeUnit.SECONDS,
-				new ArrayBlockingQueue<Runnable>(32),
-				Executors.defaultThreadFactory());
+			10,
+			15,
+			10,
+			TimeUnit.SECONDS,
+			new ArrayBlockingQueue<Runnable>(32),
+			Executors.defaultThreadFactory());
 	}
 
 	public ThreadPoolExecutor getInstance() {
