@@ -78,7 +78,9 @@
 	</appender>
 
 	<root level="info">
-		<!-- <level value="error" /> <level value="info" /> -->
+		<!--   -->
+		<level value="error" />
+		<level value="info" />
 		<appender-ref ref="suc" />
 		<appender-ref ref="err" />
 		<appender-ref ref="warn" />

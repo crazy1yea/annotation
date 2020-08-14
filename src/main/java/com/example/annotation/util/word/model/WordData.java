@@ -1,21 +1,21 @@
 package com.example.annotation.util.word.model;
 
+import org.springframework.util.ObjectUtils;
+
 import java.io.File;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.util.ObjectUtils;
-
 
 /**
  * word报告数据
- * @author slzs
  * 2015-1-22 上午11:42:00
  * each engineer has a duty to keep the code elegant
  */
-public class WordData {
+public class WordData implements Serializable {
 
     private Map<String, String>         textFieldMap; // 文本字段
 
@@ -30,7 +30,6 @@ public class WordData {
 
     /**
      * 添加文本字段
-     * @author: slzs
      * 2015-1-22 上午11:48:16
      * @param key ${key}
      * @param text 显示文本
@@ -73,7 +72,7 @@ public class WordData {
      * @author: slzs
      * 2015-1-22 下午1:51:12
      * @param key ${key}
-     * @param InputStream 图片流
+     * @param imageStream 图片流
      * @param width 固定宽度,null:自动
      * @param height 固定高度,null:自动
      */

@@ -9,6 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RunableExtension implements Runnable {
 	private String name;
+
+	public String getName(){
+		return name;
+	}
 	
 	public RunableExtension(String name){
 		this.name = name;
@@ -17,13 +21,14 @@ public class RunableExtension implements Runnable {
 	public void run() {
 		this.call();
 	}
+
 	private boolean call(){
 		try {
-			//Thread.sleep(10010);
 			log.debug(this.name);
 		} catch (Exception e) {
 			log.error("thread.sleep",e);
+			return true;
 		}
-		return false;
+		return true;
 	}
 }

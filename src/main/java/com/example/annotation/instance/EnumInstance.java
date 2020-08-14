@@ -19,8 +19,8 @@ public enum EnumInstance {
 
 	private EnumInstance() {
 		executor = new ThreadPoolExecutor(
-			10,
-			15,
+			1,
+			1,
 			10,
 			TimeUnit.SECONDS,
 			new ArrayBlockingQueue<Runnable>(32),

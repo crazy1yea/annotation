@@ -1,13 +1,11 @@
 package com.spring.annotation;
 
+import com.example.annotation.config.ConfigInitializer;
+import com.example.annotation.config.RootConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-
-import com.example.annotation.config.ConfigInitializer;
-import com.example.annotation.config.RootConfig;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @ContextConfiguration(classes = { ConfigInitializer.class })
@@ -15,8 +13,8 @@ public class AppTest {
 	@Test
 	public void getContextConfiguration() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(RootConfig.class);
-		log.info("Annotation test！");
-		
+		log.info("Spring Test!");
+
 		/*
 		// FTP 相关测试
 		FtpRemoteFileTemplate ftpRemoteFileTemplate = context.getBean(FtpRemoteFileTemplate.class);
@@ -34,5 +32,4 @@ public class AppTest {
 		});
 		*/
 	}
-
 }
